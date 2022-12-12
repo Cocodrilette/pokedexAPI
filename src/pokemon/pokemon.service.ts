@@ -9,6 +9,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -27,8 +28,13 @@ export class PokemonService {
     }
   }
 
-  async findAll() {
-    const pokemons = await this.pokemonModel.find({});
+  async findAll({ offset = 0, limit = 10 }: PaginationDto) {
+    const pokemons = await this.pokemonModel
+      .find({})
+      .skip(offset)
+      .limit(limit)
+      .sort({ no: 1 })
+      .select('-__v');
     if (pokemons.length === 0)
       throw new InternalServerErrorException(
         'Cannot find pokemons in the database',
