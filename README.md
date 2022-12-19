@@ -16,6 +16,7 @@
 - [3. Installation](#3-installation)
 - [5. Running the app](#5-running-the-app)
     - [1. Clone the repo](#1-clone-the-repo)
+    - [2. Install dependencies](#2-install-dependencies)
     - [3. Install Nest CLI](#3-install-nest-cli)
     - [4. Initialize the database](#4-initialize-the-database)
 - [6. Initialize the database](#6-initialize-the-database)
@@ -58,8 +59,9 @@ $ npm install
 $ git clone https://www.github.com/cocodrilet
 ```
 
+### 2. Install dependencies
+
 ```bash
-# 2. Install dependencies
 $ npm run start
 
 # watch mode
