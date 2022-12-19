@@ -37,3 +37,4 @@ lerna-debug.log*
 # Only dev mode dirs
 mongo
 yarn.lock
+.env
