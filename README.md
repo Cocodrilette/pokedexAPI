@@ -19,12 +19,16 @@
     - [2. Install dependencies](#2-install-dependencies)
     - [3. Install Nest CLI](#3-install-nest-cli)
     - [4. Initialize the database](#4-initialize-the-database)
-- [6. Initialize the database](#6-initialize-the-database)
+- [6. Initialize the database (in dev mode)](#6-initialize-the-database-in-dev-mode)
     - [1. Install Docker](#1-install-docker)
     - [2. Install Docker Compose (already installed with Docker)](#2-install-docker-compose-already-installed-with-docker)
     - [3. Run the command:](#3-run-the-command)
 - [7. Initialize seed data](#7-initialize-seed-data)
     - [**GET** /api/v1/seed](#get-apiv1seed)
+- [8. 🚀 Deployment notes](#8--deployment-notes)
+    - [1. Create `.env.prod` file and set the enviroment variables (see `.env.example`)](#1-create-envprod-file-and-set-the-enviroment-variables-see-envexample)
+    - [2. Build the Docker image](#2-build-the-docker-image)
+    - [3. Run the Docker image](#3-run-the-docker-image)
 
 # 1. Requirements
 
@@ -83,7 +87,7 @@ $ npm i -g @nestjs/cli
 $ docker-compose up -d
 ```
 
-# 6. Initialize the database
+# 6. Initialize the database (in dev mode)
 
 ### 1. Install Docker
 
@@ -115,3 +119,19 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ``` -->
+
+# 8. 🚀 Deployment notes
+
+### 1. Create `.env.prod` file and set the enviroment variables (see `.env.example`)
+
+### 2. Build the Docker image
+
+```bash
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+### 3. Run the Docker image
+
+```bash
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```

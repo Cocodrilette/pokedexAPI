@@ -38,3 +38,4 @@ lerna-debug.log*
 mongo
 yarn.lock
 .env
+.env.prod

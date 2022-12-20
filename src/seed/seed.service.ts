@@ -30,8 +30,6 @@ export class SeedService {
         'https://pokeapi.co/api/v2/pokemon?limit=650',
       );
 
-      console.log('SERVICE', data);
-
       const results = data.results.map(({ name, url }) => {
         const segments = url.split('/');
         const no = +segments[segments.length - 2];
