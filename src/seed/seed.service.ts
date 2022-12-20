@@ -5,14 +5,14 @@ import { PokeapiResponse } from './interfaces/pokeapi-response.interface';
 import { CreatePokemonDto } from '../pokemon/dto/create-pokemon.dto';
 import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { Pokemon } from '../pokemon/entities/pokemon.entity';
-import { FetchAdapter } from 'src/common/adapters/fetch.adapter';
+import { AxiosAdapter } from '../common/adapters/axios.adapter';
 
 @Injectable()
 export class SeedService {
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
-    private readonly fetchAdapter: FetchAdapter,
+    private readonly axiosAdapter: AxiosAdapter,
   ) {}
 
   private async createBatch(createPokemonDtos: CreatePokemonDto[]) {
@@ -26,9 +26,11 @@ export class SeedService {
 
   async executeSeed() {
     try {
-      const data = await this.fetchAdapter.get<PokeapiResponse>(
+      const data = await this.axiosAdapter.get<PokeapiResponse>(
         'https://pokeapi.co/api/v2/pokemon?limit=650',
       );
+
+      console.log('SERVICE', data);
 
       const results = data.results.map(({ name, url }) => {
         const segments = url.split('/');
